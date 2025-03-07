@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Ticket Booking</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>
+</head>
+<body style="background-color: rgb(233, 225, 225);">
+    <header style="background-color: rgb(246, 235, 235); color: black;">
+        <div class="logo"><i class="fas fa-bus" style="color: #f6c206; margin: 7px;"></i>Maruti Darshan</div>
+        <nav>
+            <a href="index.html" style="color: black;">Home</a>
+            <a href="about.html" style="color: black;">About</a>
+            <a href="routes.html" style="color: black;">Routes</a>
+            <a href="contact.html" style="color: black;">Contact Us</a>
+            <a href="book.html"><button class="book" style="background-color: black; color: white;">Book Now</button></a>
+        </nav>
+    </header>
+    <br><br><br><br><br>
+    <div class="container3">
+        <h1>Bus Ticket Booking</h1>
+        <form id="bookingForm">
+            <div class="form-group">
+                <label for="name">Full Name:</label>
+                <input type="text" id="name" placeholder="Enter your full name" required>
+            </div>
+            <div class="form-group">
+                <label for="fromLocation">From:</label>
+                <input type="text" id="fromLocation" placeholder="Enter departure location" required>
+            </div>
+            <div class="form-group">
+                <label for="toLocation">To:</label>
+                <input type="text" id="toLocation" placeholder="Enter destination location" required>
+            </div>
+            <div class="form-group">
+                <label for="date">Date:</label>
+                <input type="date" id="date" required>
+            </div>
+            <div class="form-group">
+                <label for="passengers">Number of Passengers:</label>
+                <input type="number" id="passengers" placeholder="Enter number of passengers" min="1" required>
+            </div>
+            <button type="submit">Book Ticket</button>
+        </form>
+
+        <div id="ticketDetails" class="ticket-details hidden">
+            <h2>Your Ticket Details</h2>
+            <p><strong>Name:</strong> <span id="ticketName"></span></p>
+            <p><strong>From:</strong> <span id="ticketFrom"></span></p>
+            <p><strong>To:</strong> <span id="ticketTo"></span></p>
+            <p><strong>Date:</strong> <span id="ticketDate"></span></p>
+            <p><strong>Passengers:</strong> <span id="ticketPassengers"></span></p>
+            <button onclick="printTicket()">Print Ticket</button>
+        </div>
+
+        
+    </div>
+    <br><br>
+    <footer class="section-p1">
+        <div class="col">
+            
+            <h4>MARUTI DARSHAN</h4>
+            <p>Providing comfortable and reliable bus <br>
+                transportation services across India<br>
+                since 2015.</p>
+            <div class="follow">
+                <h4>Follow us</h4>
+                <div class="icon-f">
+                    <i style='font-size:24px' class="fab fa-facebook"></i>
+                    <i style='font-size:24px' class="fab fa-twitter"></i>
+                    <i style='font-size:24px' class="fab fa-instagram"></i>
+                    <i style='font-size:24px' class="fab fa-pinterest"></i>
+                    <i style='font-size:24px' class="fab fa-youtube"></i>
+                </div>
+            </div>
+        </div>
+  
+        <div class="col">
+            <h4>Explore</h4>
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="routes.html">Routes</a>
+            <a href="contact.html">Contact Us</a>
+            <a href="book.html">Book Now</a>
+        </div>
+  
+        <div class="col">
+            <h4>Contact Us </h4>
+            <i style="font-size:24px; color:#fff" class="fa">&#xf095;</i><br>
+            <a href="https://wa.me/7984484502"><h5>7984484502</h5></a><a href="https://wa.me/9624592920"><h5>9624592920</h5></a>
+            <i style="font-size:24px; color:#fff" class="fa">&#xf0e0;</i><br>
+            <a href="#"><h5>akshat.dev.5303@gmail.com</h5></a><a href="#"><h5>sumitpatel4675@gmail.com</h5></a>
+        </div>
+  
+        <div class="copyright">
+            <p><center>@ 2025, MARUTI DARSHAN - THANK YOU FOR VISIT </center></p>
+        </div>
+    </footer>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    <script>
+        document.getElementById('bookingForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+        
+            const name = document.getElementById('name').value;
+            const fromLocation = document.getElementById('fromLocation').value;
+            const toLocation = document.getElementById('toLocation').value;
+            const date = document.getElementById('date').value;
+            const passengers = document.getElementById('passengers').value;
+        
+            document.getElementById('ticketName').textContent = name;
+            document.getElementById('ticketFrom').textContent = fromLocation;
+            document.getElementById('ticketTo').textContent = toLocation;
+            document.getElementById('ticketDate').textContent = date;
+            document.getElementById('ticketPassengers').textContent = passengers;
+        
+            // Show ticket details before generating PDF
+            const ticketDetails = document.getElementById('ticketDetails');
+            ticketDetails.classList.remove('hidden');
+        
+            // Wait briefly to ensure rendering before generating PDF
+            setTimeout(() => {
+                generatePDF(ticketDetails);
+            }, 500);
+        });
+        
+        function generatePDF(content) {
+            html2pdf().from(content).set({
+                margin: 10,
+                filename: 'Bus_Ticket.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            }).save();
+        }
+        
+    </script>
+
+    
+
+</body>
+</html>
