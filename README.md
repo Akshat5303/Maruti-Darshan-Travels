@@ -1,6 +1,8 @@
 # Maruti Darshan Travels
 
 maruti darshan travels agency, you can also book your ticket here! This education purpose website.
+I Requested to you Please Make Sure You Open This Website In your Desktop / PC.
+It Is Not Mobile Responsive.
 
 ## Instalation
 
